@@ -24,42 +24,42 @@ public class TestIoTSystem {
 		Thread brokerthread = new Thread(broker);
 
 		System.out.println("Starting broker ...");
-		
+
 		brokerthread.start();
-		
+
 		// allow broker to reaching waiting for incoming connections
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-				System.out.println("Starting display ...");
-		displaythread.start();
-		
-		// allow display to create topic 
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
+		System.out.println("Starting display ...");
 		
+		displaythread.start();
+
+		// allow display to create topic
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		System.out.println("Starting sensor ...");
 		sensorthread.start();
 
-
 		try {
-			
+
 			displaythread.join();
 			sensorthread.join();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		// we check only termination here
 		assertTrue(true);
-			
+
 		System.out.println("IoT system stopping ...");
 	}
 }
